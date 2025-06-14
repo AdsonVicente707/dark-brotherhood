@@ -1,0 +1,57 @@
+ const geminiButton = document.getElementById('gemini-button');
+        const userInput = document.getElementById('userInput');
+        const responseContainer = document.getElementById('response-container');
+        const geminiResponse = document.getElementById('gemini-response');
+
+        geminiButton.addEventListener('click', async () => {
+            const userText = userInput.value;
+            if (!userText.trim()) {
+                geminiResponse.textContent = "O Vazio não pode ouvir o silêncio. Fale...";
+                responseContainer.classList.remove('hidden');
+                return;
+            }
+
+            // Mostra o estado de carregamento
+            geminiResponse.textContent = "A Mãe da Noite escuta...";
+            responseContainer.classList.remove('hidden');
+            geminiButton.disabled = true;
+            geminiButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+            try {
+                // Monta o prompt para a IA com instruções para ser mais objetiva
+                const prompt = `Aja como a "Mãe da Noite" da guilda Dark Brotherhood do jogo The Elder Scrolls V: Skyrim. Um seguidor sussurrou o seguinte para você: "${userText}". Sua resposta deve ser em português, mantendo um tom sombrio e autoritário. Dê um conselho ou uma instrução direta relacionada à pergunta do seguidor, mas envolva-a com a linguagem da Irmandade Sombria (Vazio, Sithis, sangue, escuridão, contratos). Seja mais objetivo e menos enigmático do que o habitual.`;
+                
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = "AIzaSyBSXiup9M8R-lk8yyA8cnlVtyyxEVDUaHs"; // A chave da API será inserida pelo ambiente
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                let text = "O Vazio permanece em silêncio. Tente novamente mais tarde."; // Resposta padrão
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    text = result.candidates[0].content.parts[0].text;
+                }
+                geminiResponse.textContent = text;
+
+            } catch (error) {
+                console.error("Erro ao contatar a Mãe da Noite:", error);
+                geminiResponse.textContent = "Uma interferência perturba a conexão com o Vazio. Tente mais tarde.";
+            } finally {
+                // Reabilita o botão
+                geminiButton.disabled = false;
+                geminiButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        });

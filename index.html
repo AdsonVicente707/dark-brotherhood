@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Brotherhood</title>
+    
+    <!-- Tailwind CSS para estilização rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts para uma fonte temática -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos personalizados */
+        body {
+            font-family: 'Cinzel Decorative', cursive;
+            background-color: #000000;
+            background-color: black;
+        }
+
+        /* Animação de pulsação para a imagem */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 8px rgba(185, 28, 28, 0.7));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 20px rgba(239, 68, 68, 1));
+            }
+        }
+
+        .hand-pulse {
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        /* Sombra para o texto para melhor legibilidade */
+        .text-shadow {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-black text-gray-300">
+
+    <!-- Container Principal -->
+    <main class="min-h-screen w-full flex flex-col items-center justify-center text-center p-4 overflow-hidden">
+        
+        <div class="mb-8 hand-pulse">
+            <!-- IMAGEM ATUALIZADA -->
+            <img src="imagens/dark brothehood.png" alt="A Mão Negra com as palavras 'We Know', o símbolo da Dark Brotherhood" class="w-48 h-auto"
+            onerror="this.onerror=null; this.src='https://placehold.co/192x192/000000/ffffff?text=Mão+Negra';">
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-bold text-gray-200 tracking-widest text-shadow mb-4 animate-pulse">
+            NÓS SABEMOS
+        </h1>
+        
+        <div class="w-1/3 md:w-1/4 border-b-2 border-red-800 my-6"></div>
+        
+        <div class="text-gray-400 text-sm md:text-base max-w-2xl text-shadow">
+            <p class="mb-2">Doce Mãe, Doce Mãe, envie seu filho para mim,</p>
+            <p class="mb-4">pois os pecados dos indignos devem ser batizados em sangue e medo.</p>
+            
+            <div class="mt-8 italic opacity-80">
+                <p class="mb-2">Mandamento I: Nunca desonre a Mãe da Noite. Agir assim é invocar a ira de Sithis.</p>
+                <p class="mb-2">Mandamento II: Nunca traia a Dark Brotherhood ou seus segredos. Agir assim é invocar a ira de Sithis.</p>
+                <p class="mb-2">Mandamento III: Nunca desobedeça ou recuse a cumprir uma ordem de um superior da Dark Brotherhood. Agir assim é invocar a ira de Sithis.</p>
+                <p class="mb-2">Mandamento IV: Nunca roube de um Irmão ou Irmã da Dark Brotherhood. Agir assim é invocar a ira de Sithis.</p>
+                <p class="mb-2">Mandamento V: Nunca mate um Irmão ou Irmã da Dark Brotherhood. Agir assim é invocar a ira de Sithis.</p>
+            </div>
+        </div>
+
+        <!-- Divisor -->
+        <div class="w-1/2 md:w-1/3 border-b-2 border-red-900/50 my-10"></div>
+        
+        <!-- Seção da API Gemini -->
+        <section id="gemini-feature" class="max-w-2xl w-full px-4">
+            <h2 class="text-3xl text-red-700 text-shadow mb-4">Sussurre à Mãe da Noite</h2>
+            <p class="text-gray-500 mb-6 italic">Peça orientação. Confesse seus pecados. O Vazio escuta.</p>
+            <div class="flex flex-col items-center">
+                <textarea id="userInput" rows="3" class="w-full bg-gray-900/50 border border-gray-700 rounded-md p-2 text-gray-300 focus:outline-none focus:ring-2 focus:ring-red-800 transition duration-300" placeholder="Sua prece..."></textarea>
+                <button id="gemini-button" class="mt-4 px-6 py-2 bg-red-800 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 active:bg-red-900 transition-all duration-200 flex items-center gap-2">
+                    ✨ Rezar por Sabedoria
+                </button>
+                <div id="response-container" class="mt-6 p-4 w-full bg-black/30 border border-dashed border-gray-700 rounded-md min-h-[50px] text-left hidden">
+                    <p id="gemini-response" class="text-gray-400 italic whitespace-pre-wrap"></p>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="mt-16 mb-4 text-xs text-gray-600">
+            <p>O que é a vida, senão uma grande piada?</p>
+        </footer>
+    </main>
+
+    <script src="scripts">
+        
+    </script>
+</body>
+</html>
