@@ -55,9 +55,11 @@
                 geminiButton.classList.remove('opacity-50', 'cursor-not-allowed');
             }
         });
-         document.addEventListener('DOMContentLoaded', function() {
+         
+// Define o volume do áudio para 3% quando a página é carregada
+        document.addEventListener('DOMContentLoaded', function() {
                     const audio = document.querySelector('audio');
                     if (audio) {
-                        audio.volume = 0.03; // Define o volume para 20%
+                        audio.volume = 0.03; // Define o volume para 3%
                     }
                 });
